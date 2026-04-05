@@ -1,87 +1,64 @@
-# Fashion MNIST Classification using PyTorch (ANN - CPU)
+Fashion MNIST Classification using PyTorch (ANN - CPU)
+Project Overview
 
-## Project Overview
-This project demonstrates a complete deep learning workflow using PyTorch to classify grayscale fashion images. The model is implemented using a fully connected Artificial Neural Network (ANN) and trained entirely on a CPU.
+This project demonstrates an end-to-end deep learning pipeline using PyTorch to classify grayscale fashion images from the Fashion MNIST dataset. A fully connected Artificial Neural Network (ANN) is implemented and trained on a CPU.
 
-The dataset is loaded from a CSV file and processed step-by-step, including visualization, preprocessing, custom dataset creation, model training, and evaluation.
+The workflow includes data loading from CSV, visualization, preprocessing, custom dataset creation, model training, and evaluation.
 
----
+Objective
 
-## Objective
-The goal of this project is to classify 28×28 grayscale images into one of 10 fashion categories using a neural network.
+To classify 28×28 grayscale images into 10 fashion categories using a neural network model.
 
----
+Dataset Description
+Dataset: Fashion MNIST (CSV format)
+Total Samples: 6000
+Features: 784 (28×28 flattened pixels)
+Classes: 10 (labels 0–9)
+Data Format:
+Column 0 → Label
+Column 1–784 → Pixel intensity values
+Data Visualization
+Visualized first 16 samples using matplotlib
+Reshaped flattened vectors (784 → 28×28)
+Verified labels with corresponding images
+Data Preprocessing
+Separated features and labels
+Train-test split:
+Training: 80%
+Testing: 20%
+Normalized pixel values to range [0, 1]
+Custom Dataset (PyTorch)
 
-## Dataset Description
-- Dataset: Fashion MNIST (CSV format)
-- Total samples: 6000
-- Features: 784 (28×28 pixels flattened)
-- Labels: 10 classes (0–9)
+Implemented a custom dataset class using torch.utils.data.Dataset:
 
-Each row in the dataset:
-- Column 0 → Label  
-- Column 1–784 → Pixel values  
-
----
-
-## Data Visualization
-- Visualized first 16 images using matplotlib  
-- Reshaped 784 values into 28×28 images  
-- Displayed labels for verification  
-
----
-
-## Data Preprocessing
-- Separated features and labels  
-- Train-test split:
-  - Training: 80%  
-  - Testing: 20%  
-- Normalized pixel values:
-  - Scaled from [0–255] to [0–1]  
-
----
-
-## Custom Dataset (PyTorch)
-
-python
-class CustomDataset(Dataset):
-    def __init__(self, features, labels):
-        self.features = torch.tensor(features, dtype=torch.float32)
-        self.labels = torch.tensor(labels, dtype=torch.long)
-
-    def __len__(self):
-        return len(self.features)
-
-    def __getitem__(self, index):
-        return self.features[index], self.labels[index]
-        
-Functionality:
-__len__() → returns total samples
-__getitem__() → returns (features, label)
+Converts NumPy arrays into PyTorch tensors
+Implements:
+__len__() → returns dataset size
+__getitem__() → returns (feature, label) pair
 DataLoader Configuration
-Batch size: 32
-Training loader: shuffle = True
-Test loader: shuffle = False
+Batch Size: 32
+Training Loader: Shuffle = True
+Testing Loader: Shuffle = False
 Model Architecture (ANN)
 
-Input Layer (784)
-→ Linear (128 neurons) + ReLU
-→ Linear (64 neurons) + ReLU
-→ Output Layer (10 neurons)
+A fully connected neural network:
 
+Input Layer: 784
+Hidden Layer 1: 128 neurons + ReLU
+Hidden Layer 2: 64 neurons + ReLU
+Output Layer: 10 neurons (classes)
 Training Setup
 Loss Function: CrossEntropyLoss
 Optimizer: Stochastic Gradient Descent (SGD)
 Learning Rate: 0.1
 Epochs: 10
 Training Process
-Forward pass → predictions
-Loss calculation
+Forward propagation for predictions
+Loss computation
 Backpropagation
-Parameter update using optimizer
-Evaluation
-_, predicted = torch.max(outputs, 1)
-Result:
+Weight updates using optimizer
+Evaluation using torch.max()
+Performance
 Test Accuracy: ~83%
 Tech Stack
 Python
@@ -98,16 +75,14 @@ fashion-mnist-ann-pytorch/
 │   └── ann_fashion_mnist_pytorch_with_CPU.ipynb
 │── README.md
 │── requirements.txt
-
 How to Run
 Step 1: Clone Repository
 git clone https://github.com/your-username/fashion-mnist-ann-pytorch.git
 cd fashion-mnist-ann-pytorch
-
 Step 2: Install Dependencies
 pip install -r requirements.txt
-
 Step 3: Run Notebook
+
 Open Jupyter Notebook or Google Colab and run:
 
 notebook/ann_fashion_mnist_pytorch_with_CPU.ipynb
