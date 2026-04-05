@@ -99,8 +99,8 @@ A fully connected neural network:
 
 ---
 ##Requirements
-pandas
-numpy
-matplotlib
-scikit-learn
-torch
+- pandas
+- numpy
+- matplotlib
+- scikit-learn
+- torch
